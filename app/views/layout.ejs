@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <title>Application Name<% if (this.title) { %> - <%= this.title %><% } %></title>
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="/">Application Name</a>
+          <div class="nav-collapse">
+            <% this.navitem = function navitem(controller, action, text) { %>
+              <li <% if (controller === route.viewDir) { %> class="active"<% } %>>
+                <a href="<%= urlFor({controller: controller, action: action}) %>"><%= text %></a>
+              </li>
+            <% } %>
+            <ul class="nav">
+              <% this.navitem('pages', 'main', 'Home') %>
+              <% this.navitem('about', 'index', 'About') %>
+            </ul>
+            <p class="navbar-text pull-right">
+              <% if (! user) { %>
+                <a href="<%= urlFor({ controller: 'account', action: 'login'}) %>">Login</a> or
+                <a href="<%= newAccountPath() %>">Sign up</a>
+              <% } else { %>
+                Logged in as <a href="/account"><%= user.name %></a>.
+                <a href="<%= urlFor({ controller: 'account', action: 'logout'}) %>">Logout</a>
+              <% } %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <%- messages() %>
+    </div>
+    <div class="container-fluid">
+      <%- body %>
+    </div>
+    <hr />
+    <footer>
+    &copy; Stuff and things
+    </footer>
+  </body>
+</html>

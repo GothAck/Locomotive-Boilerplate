@@ -1,0 +1,20 @@
+header, footer {
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+header {
+  top: 0;
+}
+
+footer {
+  bottom: 0;
+}
+
+header ul, footer ul {
+  list-style-type: none;
+}
+header ul li, footer ul li {
+  display: inline;
+}
