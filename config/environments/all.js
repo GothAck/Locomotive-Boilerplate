@@ -25,7 +25,7 @@ module.exports = function() {
         .toString('base64').slice(0, 24);
     return req.session.csrf_token;
   }));
-  this.use(require('../../lib/email_lib')());
+  this.use(require('../../lib/email')());
   this.use(this.router);
   this.use(express.static(__dirname + '/../../public'));
   
