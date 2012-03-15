@@ -45,17 +45,14 @@ AccountController.create = function() {
         } else {
           self.confirmation_hash = account.confirmation_hash;
           self.email = account.email;
-          self.render('email/confirm', {
-              callback: function (err, html) {
-                if (err) return;
-                self.req.sendMail({
-                    to: account.email
-                  , subject: 'Activate your account'
-                  , html: html
-                });
-              }
-            , layout: 'email'
-          })
+          self.render('email/confirm', { layout: 'email' }, function (err, html) {
+            if (err) return;
+            self.req.sendMail({
+                to: account.email
+              , subject: 'Activate your account'
+              , html: html
+            });
+          });
 
           self.req.flash('info', 'Account created, please check your email!');
           self.redirect(self.urlFor({ action: 'login' }));
